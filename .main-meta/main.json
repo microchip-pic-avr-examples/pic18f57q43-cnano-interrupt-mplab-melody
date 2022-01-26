@@ -1,0 +1,54 @@
+{
+    "metaDataVersion": "1.0.0",
+    "category": "com.microchip.ide.project",
+    "content": {
+        "metaDataVersion": "1.3.0",
+        "name": "com.microchip.mcu8.mplabx.project.pic18f57q43-cnano-interrupt-mplab-mcc",
+        "version": " ",
+        "displayName": "",
+        "projectName": "pic18f57q43-cnano-interrupt-mplab-mcc",
+        "shortDescription": "This code example showcases vectored interrupt operation with three interrupt sources Timer 0 Timer 1 and Interrupt on change The result will be displayed in the MPLAB Data Visualizer through the UART interface",
+        "ide": {
+            "name": "MPLAB X",
+            "semverRange": ">=6.00.0"
+        },
+        "compiler": [
+            {
+                "name": "XC8",
+                "semverRange": "^2.35.0"
+            }
+        ],
+        "dfp": {
+            "name": "",
+            "semverRange": ""
+        },
+        "configurator": {
+            "name": "",
+            "semverRange": ""
+        },
+        "device": {
+            "metaDataVersion": "1.0.0",
+            "category": "com.microchip.portal.contentRef",
+            "content": {
+                "metaDataVersion": "1.0.0",
+                "category": "com.microchip.device",
+                "name": "PIC18F57Q43",
+                "versionRange": "*"
+            }
+        },
+        "author": "Sam Lam",
+        "peripherals": [],
+        "keywords": [],
+        "additionalData": {
+            "longDescription": {
+                "metaDataVersion": "1.0.0",
+                "category": "com.microchip.portal.fileRef",
+                "content": {
+                    "metaDataVersion": "1.0.0",
+                    "fileName": "./README.md",
+                    "mimeType": "text/markdown"
+                }
+            }
+        }
+    }
+}
