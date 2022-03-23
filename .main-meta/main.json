@@ -37,26 +37,11 @@
             }
         },
         "author": "Sam Lam",
-        "subcategories": [
-            "MCC",
-            [
-                  "Peripherals", "Interrupt"
-            ],
-            [
-                  "Peripherals", "Timer"
-            ],
-            [
-                "Peripherals", "IOC"
-            ],
-            [
-                "Peripherals", "UART"
-            ]
-        ],
         "peripherals": [
             "Interrupt", "Timer", "IOC", "UART"
         ],
         "keywords": [
-            "MCC", "Melody", "MCC Melody", "Interrupt", "Data Visualizer", "MPLAB Data Visualizer"
+            "MCC Melody", "Interrupt", "Data Visualizer"
         ],
         "additionalData": {
             "longDescription": {
