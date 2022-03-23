@@ -56,7 +56,7 @@
             "Interrupt", "Timer", "IOC", "UART"
         ],
         "keywords": [
-            "MCC", "Melody", "MCC Melody", "Vectored", "Interrupt", "PIC18F57Q43", "Data Visualizer", "MPLAB Data Visualizer"
+            "MCC", "Melody", "MCC Melody", "Interrupt", "Data Visualizer", "MPLAB Data Visualizer"
         ],
         "additionalData": {
             "longDescription": {
