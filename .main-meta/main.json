@@ -38,13 +38,8 @@
         },
         "author": "Sam Lam",
         "peripherals": [
-            "INT", 
-            "TMR", 
-            "IOC", 
-            "UART"
         ],
         "keywords": [
-            "Melody", "Data Visualizer"
         ],
         "additionalData": {
             "longDescription": {
