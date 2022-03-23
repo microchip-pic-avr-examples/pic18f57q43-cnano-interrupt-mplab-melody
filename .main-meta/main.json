@@ -38,10 +38,10 @@
         },
         "author": "Sam Lam",
         "peripherals": [
-            "Interrupt", "Timer", "IOC", "UART"
+            "Melody", "INT", "TMR", "IOC", "UART", "Data Visualizer"
         ],
         "keywords": [
-            "MCC Melody", "Interrupt", "Data Visualizer"
+            "Melody", "INT", "TMR", "IOC", "UART", "Data Visualizer"
         ],
         "additionalData": {
             "longDescription": {
