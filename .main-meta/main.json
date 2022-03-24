@@ -3,11 +3,11 @@
     "category": "com.microchip.ide.project",
     "content": {
         "metaDataVersion": "1.3.0",
-        "name": "com.microchip.mcu8.mplabx.project.pic18f57q43-cnano-interrupt-mplab-mcc",
+        "name": "com.microchip.mcu8.mplabx.project.pic18f57q43-cnano-interrupt-mplab-melody",
         "version": "1.0.0",
         "displayName": "PIC18F57Q43 Vectored Interrupt Demo using MCC Melody",
-        "projectName": "pic18f57q43-cnano-interrupt-mplab-mcc",
-        "shortDescription": "This code example showcases vectored interrupt operation with three interrupt sources Timer 0 Timer 1 and Interrupt on change The result will be displayed in the MPLAB Data Visualizer through the UART interface",
+        "projectName": "pic18f57q43-cnano-interrupt-mplab-melody",
+        "shortDescription": "This code example showcases the operation of vectored interrupts using Timer 0, Timer 1 and Interrupt on Change as the interrupt sources. The result of this example will be displayed in the MPLAB Data Visualizer through the UART interface.",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.00.0"
@@ -19,7 +19,7 @@
             }
         ],
         "dfp": {
-            "name": "PIC18F-Q",
+            "name": "PIC18F-Q_DFP",
             "semverRange": "^1.13.211"
         },
         "configurator": {
@@ -38,8 +38,14 @@
         },
         "author": "Sam Lam",
         "peripherals": [
+            "INT", 
+            "TMR", 
+            "IOC", 
+            "UART"
         ],
         "keywords": [
+            "Melody", 
+            "Data Visualizer"
         ],
         "additionalData": {
             "longDescription": {
