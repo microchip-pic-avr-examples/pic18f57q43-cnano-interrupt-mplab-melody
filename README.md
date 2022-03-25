@@ -6,7 +6,7 @@
 
 <!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
 
-This code example showcases vectored-interrupt operation with three interrupt sources: Timer 0, Timer 1 and Interrupt on change. Timer 1 is set as high-priority interrupt source. Timer 0 and interrupt on change are set as low-priority interrupt sources.The result will be displayed in the MPLAB® Data Visualizer through the UART interface.
+This code example showcases vectored interrupt functionality using three separate interrupt sources: Timer 0, Timer 1 and Interrupt-on-Change. Timer 1 is configured as a high-priority interrupt source. Timer 0 and Interrupt-on-Change are configured as low-priority interrupt sources. The results of this code example will be displayed in the MPLAB® Data Visualizer through the UART interface.
 
 ## Related Documentation
 
@@ -47,41 +47,40 @@ This code example showcases vectored-interrupt operation with three interrupt so
 
 <!-- Explain how to connect hardware and set up software. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
 
-The PIC18F57Q43 Curiosity Nano Development Board is used as the test platform.
-Here is the connection diagram:
+The PIC18F57Q43 Curiosity Nano Development Board is the selected hardware platform for this code example. The diagram below shows the hardware connections for this example.
 
-With Curiosity Nano Base for Click boards™:
+Connection diagram if using Curiosity Nano Base for Click boards™:
 <br><img src="images/Hardware_setup_with_base.png">
 
-Without Curiosity Nano Base for Click boards™:
+Connection diagram without using Curiosity Nano Base for Click boards™:
 <br><img src="images/Hardware_setup.png">
 
 ## Operation
 
 <!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
 
-1. Insert the curiosity nano into Curiosity Nano click board.
+1. Insert the PIC18F57Q43 Curiosity Nano into the Curiosity Nano click board.
 
-2. Connect the curiosity nano with PC using micro USB cable to give power.
+2. Connect the PIC18F57Q43 Curiosity Nano development board to a PC using a micro USB cable to provide power and to allow for programming and debugging.
 
 3. Open the *pic18f57q43-interrupt.X* project in MPLAB® X IDE.
 
-4. Set *pic18f57q43-interrupt.X* project as main project. Right click on the project in the *Projects* tab and click *Set as Main Project*:
+4. Set *pic18f57q43-interrupt.X* project as the main project within the MPLAB® X IDE. This can be done by right clicking on the project name in the *Projects* tab and then clicking *Set as Main Project*:
 
-5. Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* drop down list of the project settings:
+5. Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* drop down list within the project settings in the MPLAB® X IDE. This can be done using the following steps:
 
-   - Right click on the project and click *Properties*;
-   - Select the PIC18F57Q43 Curiosity Nano (click on the SN) in the *Connected Hardware Tool* list and then click *OK*:
+   - Right click on the project and select *Properties*;
+   - Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* list and then click *OK*:
   
-6. Program the project to the board: right click on the project and click *Make and Program Device*:
+6. Program the project to the PIC18F57Q43 Curiosity Nano Development board by right clicking on the project and selecting the *Make and Program Device* option:
 
-7. Open the MPLAB® Data Visualizer
-   - Open the drop down list, select the COMn port for serial connection and Click the *Start streaming COMn port* button:
+7. Once the device has been successfully programmed, open the MPLAB® Data Visualizer within the MPLAB® X IDE.
+   - Once the MPLAB® Data Visualizer has launched, open the drop down list and select the COMn port for serial connection and Click the *Start streaming COMn port* button. Refer to the figure below for more information about these steps.
 <br><img src="images/Drop down list.png">
-   - In the terminal below, click COMn port as source:
+   - In the MPLAB® Data Visualizer terminal window, click COMn port as the data source as shown in the figure below.
 <br><img src="images/Terminal option.png">
 
-8. Enter 1/2/3/4 in the terminal to select the corresponding demo.
+8. Type the number "1", "2", "3", or "4" into the MPLAB® Data Visualizer terminal in order to launch the respective demo on the PIC18F57Q43 Curiosity Nano Development Board. Details pertaining to each of the available demos are shown in the figures below:
 
 - Demo 1: High/Low-Priority Interrupt While Executing Main Routine
 <br><img src="images/High Low-Priority Interrupt While Executing Main Routine.png">
@@ -96,6 +95,8 @@ Without Curiosity Nano Base for Click boards™:
 <br><img src="images/Simultaneous High- and Low-Priority Interrupts.png">
 
 ### Result
+
+The figures below show the resulting terminal outputs for each of the available demos:
 
 - Demo 1: High/Low-Priority Interrupt While Executing Main Routine
 <br><img src="images/Demo 1 result.png">
@@ -114,4 +115,4 @@ Without Curiosity Nano Base for Click boards™:
 <!-- Summarize what the example has shown -->
 
 This code example showcases the vectored interrupt feature of the PIC18F57Q43.
-This demo is for class of Microchip University 8-bit PIC® MCU Peripheral Deep Dive Interrupt class.
+This demo is for the Microchip University 8-bit PIC® MCU Peripheral Deep Dive Interrupt class.
