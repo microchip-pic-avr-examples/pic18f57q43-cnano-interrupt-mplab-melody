@@ -57,95 +57,111 @@ Connection diagram without using Curiosity Nano Base for Click boards™:
 
 ## Project Configuration
 
-The following section is the complete project configuration from [Project Creation](#project-creation) to [Interrupt Callback and Main Routine](#interrupt-callback-and-main-routine).
-<br>If you do not want to go through the project configuration, you can refer to [Operation](#operation) to operate the demo.
+The following section gives a step by step tutorial of the complete project configuration for this code example.
 
 ### Project Creation <a name="project-creation"></a>
 
-1. Click *Standalone Project*, then click *Next*
-2. Enter "PIC18F57Q43" in Devices and select PIC18F57Q43 Curiosity Nano in Tool, then click *Next*
-3. Click "XC8 with minimum version 2.35, then click *Next*
-4. Enter "pic18f57q43-interrupt" as the project name and click *Finish* to finish the project creation
-<br><img src="images/Project Creation.png">
+1. To create a new project go to "File >> New Project". Once the new project window opens, select *Standalone Project* and then click *Next*.
+<br><img src="images/project_creation_step_1.png">
+2. Enter "PIC18F57Q43" as the device and select PIC18F57Q43 Curiosity Nano as the Tool for this project. Once this is complete click *Next*.
+<br><img src="images/project_creation_step_2.png">
+3. For the compiler, select "XC8 version 2.35 (or newer) and then click *Next*.
+<br><img src="images/project_creation_step_3.png">
+4. Enter "pic18f57q43-interrupt" as the project name and click *Finish* to finish the project creation.
+<br><img src="images/project_creation_step_4.png">
 
 ### Opening MCC
 
-After creating the project, we need to open the MPLAB Code Configurator MCC to set system and peripheral configurations.
-<br>This can be done by clicking the MCC icon on the Toolbar, or go to *Tools*,  *Embedded* and click *MPLAB® Code Configurator v5: Open/Close*.
+After creating the project, the next step is to open the MPLAB Code Configurator (MCC) to set  the system and peripheral configurations.
+This can be done by clicking the MCC icon on the Toolbar, or by going to "*Tools* >> *Embedded* and clicking *MPLAB® Code Configurator: Open/Close*.
 <br><img src="images/Open MCC.png">
 
 ### Clock Control Configuration
 
-Choose *High Frequency Internal Oscillator* as the Clock Source, *1_MHz* in HF Internal Clock and *16* in Clock Divider.
+In the Clock Control configuration window which can be found under the System Settings drop down in MCC:
+<br><img src="images/system_drop_down_menu_Clock_Control.png">
+
+To configure the device system clock, select the *High Frequency Internal Oscillator* as the Clock Source, as well as the *1_MHz* option for the HF Internal Clock drop down menu and *16* in the Clock Divider drop down menu.
 <br><img src="images/Clock Control.png">
 
 ### Peripheral Drivers Configuration
 
-#### Timer 0 and Timer 1
+#### Timer 0
 
-To configure Timer 0, select *Timer 0* under Driver.
+Add Timer 0 to the MPLABX project by selecting *Timer 0* from the Driver drop down menu in MCC.
+<br><img src="images/driver_drop_down_menu_TMR0.png">
 
-1. In Hardware Settings, disable Timer, select *1:8* in Clock Prescaler, select *1:1* in Postscaler, and select *16-bit* in Timer Mode. Select *LFINTOSC* as the Clock Source and enter "5" in the Requested Period.
-2. In Interrupt Settings, enable *TMR Interrupt* option.
+1. In the Timer 0 Hardware Settings, make sure the timer is disabled by unchecking the "Enable Timer" box. Select *1:8* as the Clock Prescaler, select *1:1* as the Postscaler, and select *16-bit* as the Timer Mode. Additionally, select *LFINTOSC* as the Clock Source and enter "5" seconds as the Requested Period.
+2. In the Timer 0 Interrupt Settings, check the *TMR Interrupt Enable* check box to enable interrupts for this peripheral.
+<br><img src="images/Timer 0.png">
 
-To configure Timer 1, select *Timer 1* under Driver.
+#### Timer 1
 
-1. In Timer Clock, select *LFINTOSC* as the Clock Source and select *1:8* in Prescaler.
-2. In Timer Period, enter "5" in the Timer Period and you will see the Actual Period is 5.
-3. In Interrupt Settings, enable *TMR Interrupt Enable* option.
-<br><img src="images/Timer 0 and Timer 1.png">
+Add Timer 1 to the MPLABX project by selecting *Timer 1* from the Driver drop down menu in MCC.
+<br><img src="images/driver_drop_down_menu_TMR1.png">
 
-#### UART Dependency Selector
+1. In the MCC Easy View configuration window select *LFINTOSC* as the Timer 1 Clock Source and select *1:8* as the Prescaler.
+2. In the Timer Period field enter "5" and the "Actual Period" field should show that the Timer 1 period is 5 seconds.
+In the Timer 1 Interrupt Settings, check the *TMR Interrupt Enable* check box to enable interrupts for this peripheral.
+<br><img src="images/Timer 1.png">
 
-To configure UART 1, select *UART* under Driver.
+#### UART 1
 
-1. In UART PLIB Selector, select *UART1* .
-2. In Builder window, click on *UART1 PLIB* and *UART1* to configure UART1 settings.
-<br><img src="images/UART Dependency Selector(1).PNG">
+To configure UART 1, add the UART module to the project by selecting *UART* from the Driver drop down menu in MCC.
+<br><img src="images/driver_drop_down_menu_UART.png">
 
-In UART1PLIB:
+1. After doing this, in the "UART PLIB Selector" drop down menu that shows up, select *UART1* from the available options.
+<br><img src="images/UART_PLIB_selector.png" width="800">
+2. In the "Builder Window", click on *UART1 PLIB* and *UART1* to configure the different UART1 settings.
+<br><img src="images/builder_window.png">
+
+In the "UART1PLIB" configuration window:
 
 1. In Software Settings, enable *Redirect STDIO to UART* option.
-2. In Hardware Settings, enable *Receive*, *Transmit* and *UART* options.
+2. In Hardware Settings, enable *Receive*, *Transmit* and *UART* options by checking the respective boxes.
 3. In Advanced Settings, select *high speed* in Baud Rate Generator Speed Select.
+<br><img src="images/UART1PLIB_configuration_window.png">
 
-In UART:
+In the "UART1" configuration window:
 
 1. Set the Requested Baudrate equal to the Calculated Baudrate, "7813". This will give the baud rate error about 0.006%, which is close to 0.
-<br><img src="images/UART Dependency Selector(2).PNG">
+<br><img src="images/UART1_configuration_window.png">
 
-### Pin Manager & Pin Module Configuration
+### Pins Configuration
 
-In Pin Grid View:
+To configure the pins for this project, open the "Pin Grid View" window:
 
-1. Unlock *T0CKI*, *T1CKI*, *T1G*, *CTS1* pins as these pins are not used for this demo.
-2. Lock *PORTF1* with UART1 RX1 and *PORTF0* with UART 1 TX1.
-3. Lock *PORTB4* with GPIO input.
+1. Deselect the *T0CKI*, *T1CKI*, *T1G* and *CTS1* pins as these pins are not used for this demo. This can be done by clicking on each pin so that the closed lock changes to an open lock.
+2. Configure the UART1 RX1 pin on RF1 and the UART1 TX1 pin on RF0 by clicking the corresponding options in the Pin Grid View. The pins should change from open locks to closed locks.
+3. Configure RB4 as a GPIO input pin by clicking the corresponding lock box in the Pin Grid View. The pin should change from an open lock to a closed lock.
+<br><img src="images/pin_grid_view.png">
 
-In Pins:
+To configure the pins for this project, using the the "Pins" window which can be found under the system settings drop down menu in MCC:
+<br><img src="images/system_drop_down_menu_Pins.png">
 
-1. Deselect *Analog*, *Slew Rate* and *Input Level Control* options for RF1 and RF0.
-2. Deselect *Slew Rate* and *Input Level Control* options for RB4.
-3. Enter "Switch" in Custom Name for RB4. Select "any" in Interrupt On Change to represent the interrupt is triggered by a positive or negative edge for RB4.
-<br><img src="images/Pin Manager and Pin Module.png">
+1. Deselect the *Analog*, *Slew Rate* and *Input Level Control* options for pins RF1 and RF0.
+2. Deselect the *Slew Rate* and *Input Level Control* options for pin RB4.
+3. Enter "Switch" as a Custom Name for pin RB4. Select "any" in the "Interrupt On Change" drop down menu. This makes it so that an interrupt is triggered by a positive or negative edge on pin RB4.
+<br><img src="images/pins_window.png">
 
 ### Interrupt Manager Configuration
 
-In Interrupt Manager,
+In the Interrupt Manager configuration window which can be found under the System Settings drop down in MCC:
+<br><img src="images/system_drop_down_menu_Interrupt_Manager.png">
 
-1. Enable Vectored Interrupt, there will be two Interrupt Vector Tables representing high and low priorities.
-2. Check the *Enable* and *High Priority* options for Timer 1 Interrupt.
-3. Check the *Enable* option and uncheck the *High Priority* option for Interrupt On Change and Timer 0 Interrupt.
+1. Enable Vectored Interrupts by checking the corresponding box. There will be two Interrupt Vector Tables that represent high and low priority interrupt vectors.
+2. Check the *Enable* and *High Priority* options for Timer 1 Interrupt vector.
+3. Check the *Enable* option and uncheck the *High Priority* option for "Interrupt On Change" and "Timer 0" Interrupt vectors.
 <br><img src="images/Interrupt Manager.png">
 
 ### Melody Code Generation
 
-Click *Generate* to generate the corresponding Melody code.
+Click the *Generate* button in MCC to generate the corresponding Melody code.
 <br><img src="images/MCC Code Generation.png">\
 
 ### Interrupt Callback and Main Routine <a name="interrupt-callback-and-main-routine"></a>
 
-Once the code has been generated by Melody, add the following interrupt callback functions and main routine to the main.c file.
+Once the code has been generated by Melody, add the following interrupt callback functions and main routine into the main.c file.
 
 #### Timer1 Interrupt Callback
 
@@ -299,22 +315,22 @@ int main(void)
 
 3. Open the *pic18f57q43-interrupt.X* project in MPLAB® X IDE.
 
-4. Set *pic18f57q43-interrupt.X* project as the main project within the MPLAB® X IDE. This can be done by right clicking on the project name in the *Projects* tab and then clicking *Set as Main Project*:
+4. Set *pic18f57q43-interrupt.X* project as the main project within the MPLAB® X IDE. This can be done by right clicking on the project name in the *Projects* tab and then clicking *Set as Main Project*.
 <br><img src="images/Set as Main Project.png">
 
-5. Select the PIC18F57Q43 Curiosity Nano in the project settings within the MPLAB® X IDE. This can be done using the following steps:
+5. Select the PIC18F57Q43 Curiosity Nano in the project settings within the MPLAB® X IDE. This can be done using the following steps.
 
-- Right click on the project and select *Properties*;
+- Right click on the project and select *Properties*.
 <br><img src="images/Select Project Properties.png">
 
-- Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* and click *OK*:
+- Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* and click *OK*.
 <br><img src="images/Project Properties.png">
 
 ### Project Building
 
 Click the *Clean and Build Main Project* icon in the toolbar.
-<br>The "BUILD SUCCESSFUL" message in the Output window means no error comes up during compilation.
-<br><img src="images/Project Building.png">
+The "BUILD SUCCESSFUL" message in the Output window means no error comes up during compilation.
+<br><img src="images/Project Building.PNG">
 
 ### Device Programming
 
@@ -323,7 +339,7 @@ Click the *Make and Program Device Main Project* in the toolbar.
 <br><img src="images/Device Programming.PNG">
 
 <br>Once the device has been successfully programmed, open the MPLAB® Data Visualizer within the MPLAB® X IDE.
-<br><img src="images/Open Data Visualizer.PNG">
+<br><img src="images/Open Data Visualizer.png">
 
 - Once the MPLAB® Data Visualizer has launched, open the drop down list and select the COMn port for serial connection and Click the *Start streaming COMn port* button.
 <br><img src="images/Drop down list.png">
