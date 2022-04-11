@@ -323,6 +323,7 @@ int main(void)
 - Right click on the project and select *Properties*.
 <br><img src="images/Select Project Properties.png">
 
+
 - Select the PIC18F57Q43 Curiosity Nano in the *Connected Hardware Tool* and click *OK*.
 <br><img src="images/Project Properties.png">
 
