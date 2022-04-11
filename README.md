@@ -311,6 +311,7 @@ int main(void)
 1. Insert the PIC18F57Q43 Curiosity Nano into the Curiosity Nano Base board(if Curiosity Nano Base board is used).
 
 2. Connect the PIC18F57Q43 Curiosity Nano development board to a PC using a micro USB cable to provide power and to allow for programming and debugging.
+
 <br><img src="images/Connection with base board.jpeg" width="600"> <img src="images/Connection without base board.jpeg" width="600">
 
 
