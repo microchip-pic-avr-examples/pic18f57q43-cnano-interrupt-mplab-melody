@@ -318,6 +318,7 @@ int main(void)
 4. Set *pic18f57q43-interrupt.X* project as the main project within the MPLAB® X IDE. This can be done by right clicking on the project name in the *Projects* tab and then clicking *Set as Main Project*.
 <br><img src="images/Set as Main Project.png">
 
+
 5. Select the PIC18F57Q43 Curiosity Nano in the project settings within the MPLAB® X IDE. This can be done using the following steps.
 
 - Right click on the project and select *Properties*.
