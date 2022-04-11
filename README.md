@@ -313,6 +313,7 @@ int main(void)
 2. Connect the PIC18F57Q43 Curiosity Nano development board to a PC using a micro USB cable to provide power and to allow for programming and debugging.
 <br><img src="images/Connection with base board.jpeg" width="600"> <img src="images/Connection without base board.jpeg" width="600">
 
+
 3. Open the *pic18f57q43-interrupt.X* project in MPLAB® X IDE.
 
 4. Set *pic18f57q43-interrupt.X* project as the main project within the MPLAB® X IDE. This can be done by right clicking on the project name in the *Projects* tab and then clicking *Set as Main Project*.
