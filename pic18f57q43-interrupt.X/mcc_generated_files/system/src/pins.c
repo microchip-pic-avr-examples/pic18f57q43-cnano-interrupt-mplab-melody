@@ -8,11 +8,11 @@
  * @brief This is generated driver implementation for pins. 
  *        This file provides implementations for pin APIs for all pins selected in the GUI.
  *
- * @version Driver Version 3.0.0
+ * @version Driver Version 3.1.0
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -34,7 +34,7 @@
 
 #include "../pins.h"
 
-void (*RB4_InterruptHandler)(void);
+void (*Switch_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -72,19 +72,11 @@ void PIN_MANAGER_Initialize(void)
     WPUx registers
     */
     WPUA = 0x0;
-    WPUB = 0x0;
+    WPUB = 0x10;
     WPUC = 0x0;
     WPUD = 0x0;
     WPUE = 0x0;
     WPUF = 0x0;
-
-    /**
-    RxyI2C registers
-    */
-    RB1I2C = 0x0;
-    RB2I2C = 0x0;
-    RC3I2C = 0x0;
-    RC4I2C = 0x0;
 
     /**
     ODx registers
@@ -110,11 +102,19 @@ void PIN_MANAGER_Initialize(void)
     INLVLx registers
     */
     INLVLA = 0xFF;
-    INLVLB = 0xEF;
+    INLVLB = 0xFF;
     INLVLC = 0xFF;
     INLVLD = 0xFF;
     INLVLE = 0xF;
-    INLVLF = 0xFC;
+    INLVLF = 0xFF;
+
+    /**
+    RxyI2C | RxyFEAT registers   
+    */
+    RB1I2C = 0x0;
+    RB2I2C = 0x0;
+    RC3I2C = 0x0;
+    RC4I2C = 0x0;
     /**
     PPS registers
     */
@@ -137,7 +137,7 @@ void PIN_MANAGER_Initialize(void)
     IOCEN = 0x0;
     IOCEF = 0x0;
 
-    RB4_SetInterruptHandler(RB4_DefaultInterruptHandler);
+    Switch_SetInterruptHandler(Switch_DefaultInterruptHandler);
 
     // Enable PIE0bits.IOCIE interrupt 
     PIE0bits.IOCIE = 1; 
@@ -145,41 +145,41 @@ void PIN_MANAGER_Initialize(void)
   
 void PIN_MANAGER_IOC(void)
 {
-    // interrupt on change for pin RB4
+    // interrupt on change for pin Switch
     if(IOCBFbits.IOCBF4 == 1)
     {
-        RB4_ISR();  
+        Switch_ISR();  
     }
 }
    
 /**
-   RB4 Interrupt Service Routine
+   Switch Interrupt Service Routine
 */
-void RB4_ISR(void) {
+void Switch_ISR(void) {
 
-    // Add custom RB4 code
+    // Add custom Switch code
 
     // Call the interrupt handler for the callback registered at runtime
-    if(RB4_InterruptHandler)
+    if(Switch_InterruptHandler)
     {
-        RB4_InterruptHandler();
+        Switch_InterruptHandler();
     }
     IOCBFbits.IOCBF4 = 0;
 }
 
 /**
-  Allows selecting an interrupt handler for RB4 at application runtime
+  Allows selecting an interrupt handler for Switch at application runtime
 */
-void RB4_SetInterruptHandler(void (* InterruptHandler)(void)){
-    RB4_InterruptHandler = InterruptHandler;
+void Switch_SetInterruptHandler(void (* InterruptHandler)(void)){
+    Switch_InterruptHandler = InterruptHandler;
 }
 
 /**
-  Default interrupt handler for RB4
+  Default interrupt handler for Switch
 */
-void RB4_DefaultInterruptHandler(void){
-    // add your RB4 interrupt custom code
-    // or set custom function using RB4_SetInterruptHandler()
+void Switch_DefaultInterruptHandler(void){
+    // add your Switch interrupt custom code
+    // or set custom function using Switch_SetInterruptHandler()
 }
 /**
  End of File

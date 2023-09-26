@@ -7,10 +7,10 @@
  * 
  * @brief This file contains API prototypes and other datatypes for UART1 module.
  *
- * @version UART1 Driver Version 3.0.0
+ * @version UART1 Driver Version 3.0.4
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -62,12 +62,13 @@
 
 #define UART1_TransmitEnable       UART1_TransmitEnable
 #define UART1_TransmitDisable      UART1_TransmitDisable
-#define UART1_AutoBaudSet          (NULL)
-#define UART1_AutoBaudQuery        (NULL)
-#define UART1_BRGSet               (NULL)
-#define UART1_BRGGet               (NULL)
-#define UART1_BaudSet              (NULL)
-#define UART1_BaudGet              (NULL)
+#define UART1_AutoBaudSet          UART1_AutoBaudSet
+#define UART1_AutoBaudQuery        UART1_AutoBaudQuery
+#define UART1_BRGCountSet               (NULL)
+#define UART1_BRGCountGet               (NULL)
+#define UART1_BaudRateSet               (NULL)
+#define UART1_BaudRateGet               (NULL)
+#define UART1__AutoBaudEventEnableGet   (NULL)
 #define UART1_ErrorGet             UART1_ErrorGet
 
 #define UART1_TxCompleteCallbackRegister     (NULL)
@@ -191,6 +192,47 @@ inline void UART1_SendBreakControlDisable(void);
 
 /**
  * @ingroup uart1
+ * @brief This API enables the UART1 AutoBaud Detection.
+ * @param bool enable.
+ * @return None.
+ */
+inline void UART1_AutoBaudSet(bool enable);
+
+
+/**
+ * @ingroup uart1
+ * @brief This API reads the UART1 AutoBaud Detection Complete bit.
+ * @param None.
+ * @return None.
+ */
+inline bool UART1_AutoBaudQuery(void);
+
+/**
+ * @ingroup uart1
+ * @brief This API Reset the UART1 AutoBaud Detection Complete bit.
+ * @param None.
+ * @return None.
+ */
+inline void UART1_AutoBaudDetectCompleteReset(void);
+
+/**
+ * @ingroup uart1
+ * @brief This API reads the UART1 AutoBaud Detection overflow bit.
+ * @param None.
+ * @return None.
+ */
+inline bool UART1_IsAutoBaudDetectOverflow(void);
+
+/**
+ * @ingroup uart1
+ * @brief This API Reset the UART1 AutoBaud Detection Overflow bit.
+ * @param None.
+ * @return None.
+ */
+inline void UART1_AutoBaudDetectOverflowReset(void);
+
+/**
+ * @ingroup uart1
  * @brief This API checks if UART1 receiver has received data and ready to be read.
  * @param None.
  * @retval true if UART1 receiver FIFO has a data
@@ -269,8 +311,6 @@ void UART1_OverrunErrorCallbackRegister(void (* callbackHandler)(void));
  * @return None.
  */
 void UART1_ParityErrorCallbackRegister(void (* callbackHandler)(void));
-
-char UART1_getch(void);
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 

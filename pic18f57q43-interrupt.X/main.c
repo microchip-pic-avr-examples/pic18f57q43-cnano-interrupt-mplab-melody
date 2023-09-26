@@ -11,7 +11,7 @@
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -91,7 +91,7 @@ int main(void)
     bool done = false;  
    
     Timer0_OverflowCallbackRegister (Timer0_Callback);
-    Timer1_OverflowCallbackRegister (Timer1_Callback);
+    TMR1_OverflowCallbackRegister (Timer1_Callback);
     RB4_SetInterruptHandler (RB4_IOC_Callback);
 
     printf("---------------------------------------------------------------------------\r\n\n");
@@ -104,42 +104,41 @@ int main(void)
         done = true;
         UART1_Enable();
         
-
         while(!(UART1_IsRxReady()));
         switch(UART1_Read()){   
             case 49: //Decimal 1 = ASCII 49
-                        // Demo 1: High/Low-Priority Interrupt While Executing Main Routine
-                        printf("-------------------------------------------------------------------------\r\n\n");
-                        printf("Entering Demo 1: High/Low-Priority Interrupt While Executing Main Routine\r\n\n");
-                        printf("-------------------------------------------------------------------------\r\n\n");
-                        break;
-                    case 50: //Decimal 2 = ASCII 50
-                        // Demo 2: High-Priority Interrupt with a Low-Priority Interrupt Pending
-                        printf("------------------------------------------------------------------------------\r\n\n");
-                        printf("Entering Demo 2: High-Priority Interrupt with a Low-Priority Interrupt Pending\r\n\n");
-                        printf("------------------------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
-                        break;
-                    case 51: //Decimal 3 = ASCII 51
-                        // Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts
-                        printf("---------------------------------------------------------------------------\r\n\n");
-                        printf("Entering Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts\r\n\n");
-                        printf("---------------------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
-                        break;
-                    case 52: //Decimal 4 = ASCII 52
-                        // Demo 4: Simultaneous High- and Low-Priority Interrupts
-                        printf("---------------------------------------------------------------\r\n\n");
-                        printf("Entering Demo 4: Simultaneous High- and Low-Priority Interrupts\r\n\n");
-                        printf("---------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
-                        Timer0_Start();
-                        break;
-                    default:
-                        printf("Please enter a valid number!!! (1/2/3/4) \r\n\n");
-                        UART1_Disable(); // FIFO Reset
-                        done = false;
-                        break;
+                // Demo 1: High/Low-Priority Interrupt While Executing Main Routine
+                printf("-------------------------------------------------------------------------\r\n\n");
+                printf("Entering Demo 1: High/Low-Priority Interrupt While Executing Main Routine\r\n\n");
+                printf("-------------------------------------------------------------------------\r\n\n");
+                break;
+            case 50: //Decimal 2 = ASCII 50
+                // Demo 2: High-Priority Interrupt with a Low-Priority Interrupt Pending
+                printf("------------------------------------------------------------------------------\r\n\n");
+                printf("Entering Demo 2: High-Priority Interrupt with a Low-Priority Interrupt Pending\r\n\n");
+                printf("------------------------------------------------------------------------------\r\n\n");
+                TMR1_Start();
+                break;
+            case 51: //Decimal 3 = ASCII 51
+                // Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts
+                printf("---------------------------------------------------------------------------\r\n\n");
+                printf("Entering Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts\r\n\n");
+                printf("---------------------------------------------------------------------------\r\n\n");
+                TMR1_Start();
+                break;
+            case 52: //Decimal 4 = ASCII 52
+                // Demo 4: Simultaneous High- and Low-Priority Interrupts
+                printf("---------------------------------------------------------------\r\n\n");
+                printf("Entering Demo 4: Simultaneous High- and Low-Priority Interrupts\r\n\n");
+                printf("---------------------------------------------------------------\r\n\n");
+                TMR1_Start();
+                Timer0_Start();
+                break;
+            default:
+                printf("Please enter a valid number!!! (1/2/3/4) \r\n\n");
+                UART1_Disable(); // FIFO Reset
+                done = false;
+                break;
         }
     }
     

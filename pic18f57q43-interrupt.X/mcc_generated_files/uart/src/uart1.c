@@ -7,11 +7,11 @@
  * 
  * @brief This is the generated driver implementation file for the UART1 driver using CCL
  *
- * @version UART1 Driver Version 3.0.0
+ * @version UART1 Driver Version 3.0.4
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -54,12 +54,13 @@ const uart_drv_interface_t UART1 = {
     .IsTxDone = &UART1_IsTxDone,
     .TransmitEnable = &UART1_TransmitEnable,
     .TransmitDisable = &UART1_TransmitDisable,
-    .AutoBaudSet = NULL,
-    .AutoBaudQuery = NULL,
-    .BRGSet = NULL,
-    .BRGGet = NULL,
-    .BaudSet = NULL,
-    .BaudGet = NULL,
+    .AutoBaudSet = &UART1_AutoBaudSet,
+    .AutoBaudQuery = &UART1_AutoBaudQuery,
+    .BRGCountSet = NULL,
+    .BRGCountGet = NULL,
+    .BaudRateSet = NULL,
+    .BaudRateGet = NULL,
+    .AutoBaudEventEnableGet = NULL,
     .ErrorGet = &UART1_ErrorGet,
     .TxCompleteCallbackRegister = NULL,
     .RxCompleteCallbackRegister = NULL,
@@ -96,7 +97,7 @@ void UART1_Initialize(void)
 
     // Set the UART1 module to the options selected in the user interface.
 
-    //RXB disabled; 
+    //
     U1RXB = 0x0; 
     //RXCHK disabled; 
     U1RXCHK = 0x0; 
@@ -121,17 +122,17 @@ void UART1_Initialize(void)
     //SENDB disabled; BRKOVR disabled; RXBIMD Set RXBKIF on rising RX input; WUE disabled; ON enabled; 
     U1CON1 = 0x80; 
     //FLO off; TXPOL not inverted; C0EN Add all TX and RX characters; STP Transmit 1Stop bit, receiver verifies first Stop bit; RXPOL not inverted; RUNOVF RX input shifter stops all activity; 
-    U1CON2 = 0x0; 
+    U1CON2 = 0x8; 
     //BRGL 1; 
     U1BRGL = 0x1; 
     //BRGH 0; 
     U1BRGH = 0x0; 
-    //STPMD in middle of first Stop bit; TXWRE No error; 
-    U1FIFO = 0x0; 
+    //TXBE empty; STPMD in middle of first Stop bit; TXWRE No error; 
+    U1FIFO = 0x20; 
     //ABDIE disabled; ABDIF Auto-baud not enabled or not complete; WUIF WUE not enabled by software; 
     U1UIR = 0x0; 
-    //TXCIF 0x0; RXFOIF not overflowed; RXBKIF No Break detected; CERIF No Checksum error; ABDOVF Not overflowed; 
-    U1ERRIR = 0x0; 
+    //TXCIF equal; RXFOIF not overflowed; RXBKIF No Break detected; FERIF no error; CERIF No Checksum error; ABDOVF Not overflowed; PERIF Byte not at top; TXMTIF empty; 
+    U1ERRIR = 0x80; 
     //TXCIE disabled; RXFOIE disabled; RXBKIE disabled; FERIE disabled; CERIE disabled; ABDOVE disabled; PERIE disabled; TXMTIE disabled; 
     U1ERRIE = 0x0; 
 
@@ -205,6 +206,39 @@ inline void UART1_SendBreakControlDisable(void)
     U1CON1bits.SENDB = 0;
 }
 
+inline void UART1_AutoBaudSet(bool enable)
+{
+    if(enable)
+    {
+        U1CON0bits.ABDEN = 1; 
+    }
+    else
+    {
+      U1CON0bits.ABDEN = 0;  
+    }
+}
+
+
+inline bool UART1_AutoBaudQuery(void)
+{
+    return (bool)U1UIRbits.ABDIF; 
+}
+
+inline void UART1_AutoBaudDetectCompleteReset(void)
+{
+    U1UIRbits.ABDIF = 0; 
+}
+
+inline bool UART1_IsAutoBaudDetectOverflow(void)
+{
+    return (bool)U1ERRIRbits.ABDOVF; 
+}
+
+inline void UART1_AutoBaudDetectOverflowReset(void)
+{
+    U1ERRIRbits.ABDOVF = 0; 
+}
+
 bool UART1_IsRxReady(void)
 {
     return (bool)(!U1FIFObits.RXBE);
@@ -249,12 +283,14 @@ uint8_t UART1_Read(void)
     return U1RXB;
 }
 
+
 void UART1_Write(uint8_t txData)
 {
     U1TXB = txData; 
 }
 
-char getch(void)
+
+int getch(void)
 {
     while(!(UART1_IsRxReady()));
     return UART1_Read();
@@ -265,6 +301,10 @@ void putch(char txData)
     while(!(UART1_IsTxReady()));
     return UART1_Write(txData);   
 }
+
+
+
+
 
 static void UART1_DefaultFramingErrorCallback(void)
 {

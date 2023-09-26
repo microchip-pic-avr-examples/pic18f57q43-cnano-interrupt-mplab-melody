@@ -2,7 +2,7 @@
 
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# Vectored Interrupt Demo for Microchip Univeristy Interrupt Class
+# Vectored Interrupt Demo for Microchip University Interrupt Class
 
 <!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
 
@@ -27,11 +27,11 @@ This code example showcases vectored interrupt functionality using three separat
      - MPLAB® Code Configurator (MCC) Device Libraries PIC10 / PIC12 / PIC16 / PIC18 MCUs [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
      - Microchip PIC18F-Q Series Device Support (1.4.109) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) -->
 
-- MPLAB® X IDE 6.00.0 or newer [(MPLAB® X IDE 6.00)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f57q43-cnano-interrupt-mplab-mcc-github)
-- MPLAB® XC8 2.35.0 or newer compiler [(MPLAB® XC8 2.35)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f57q43-cnano-interrupt-mplab-mcc-github)
-- MPLAB® Code Configurator (Plugin) v5.1.1 [(MPLAB® Code Configurator)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator)
-- MPLAB® Data Visualizer 1.3.1113 [(MPLAB® Data Visualizer)](<https://www.microchip.com/en-us/development-tools-tools-and-software/embedded-software-center/mplab-data-visualizer>)
-- Microchip PIC18F-Q Series Device Support (1.13.211) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) 
+- MPLAB® X IDE 6.00.0 or newer [(MPLAB® X IDE 6.15)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f57q43-cnano-interrupt-mplab-mcc-github)
+- MPLAB® XC8 2.35.0 or newer compiler [(MPLAB® XC8 2.45)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f57q43-cnano-interrupt-mplab-mcc-github)
+- MPLAB® Code Configurator (Plugin) v5.3.7 [(MPLAB® Code Configurator)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator)
+- MPLAB® Data Visualizer 1.3.1332 [(MPLAB® Data Visualizer)](<https://www.microchip.com/en-us/development-tools-tools-and-software/embedded-software-center/mplab-data-visualizer>)
+- Microchip PIC18F-Q Series Device Support (1.21.411) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) 
 
 ## Hardware Used
 
@@ -117,30 +117,29 @@ To configure UART 1, add the UART module to the project by selecting *UART* from
 
 In the "UART1PLIB" configuration window:
 
-1. In Software Settings, enable *Redirect STDIO to UART* option.
-2. In Hardware Settings, enable *Receive*, *Transmit* and *UART* options by checking the respective boxes.
-3. In Advanced Settings, select *high speed* in Baud Rate Generator Speed Select.
+1. In Hardware Settings, enable *Receive*, *Transmit* and *UART* options by checking the respective boxes.
+2. In Advanced Settings, select *high speed* in Baud Rate Generator Speed Select.
 <br><img src="images/UART1PLIB_configuration_window.png">
 
 In the "UART1" configuration window:
 
 1. Set the Requested Baudrate equal to the Calculated Baudrate, "7813". This will give the baud rate error about 0.006%, which is close to 0.
+2. Enable *Redirect Printf to UART* option.
 <br><img src="images/UART1_configuration_window.png">
 
 ### Pins Configuration
 
 To configure the pins for this project, open the "Pin Grid View" window:
 
-1. Deselect the *T0CKI*, *T1CKI*, *T1G* and *CTS1* pins as these pins are not used for this demo. This can be done by clicking on each pin so that the closed lock changes to an open lock.
-2. Configure the UART1 RX1 pin on RF1 and the UART1 TX1 pin on RF0 by clicking the corresponding options in the Pin Grid View. The pins should change from open locks to closed locks.
-3. Configure RB4 as a GPIO input pin by clicking the corresponding lock box in the Pin Grid View. The pin should change from an open lock to a closed lock.
+1. Configure the UART1 RX1 pin on RF1 and the UART1 TX1 pin on RF0 by clicking the corresponding options in the Pin Grid View. The pins should change from open locks to closed locks.
+2. Configure RB4 as a GPIO input pin by clicking the corresponding lock box in the Pin Grid View. The pin should change from an open lock to a closed lock.
 <br><img src="images/pin_grid_view.png">
 
 To configure the pins for this project, using the the "Pins" window which can be found under the system settings drop down menu in MCC:
 <br><img src="images/system_drop_down_menu_Pins.png">
 
 1. Deselect the *Analog*, *Slew Rate* and *Input Level Control* options for pins RF1 and RF0.
-2. Deselect the *Slew Rate* and *Input Level Control* options for pin RB4.
+2. Deselect the *Slew Rate* and *Input Level Control* options for pin RB4. Select *Weak Pullup* on pin RB4.
 3. Enter "Switch" as a Custom Name for pin RB4. Select "any" in the "Interrupt On Change" drop down menu. This makes it so that an interrupt is triggered by a positive or negative edge on pin RB4.
 <br><img src="images/pins_window.png">
 
@@ -234,7 +233,7 @@ int main(void)
     bool done = false;  
    
     Timer0_OverflowCallbackRegister (Timer0_Callback);
-    Timer1_OverflowCallbackRegister (Timer1_Callback);
+    TMR1_OverflowCallbackRegister (Timer1_Callback);
     RB4_SetInterruptHandler (RB4_IOC_Callback);
 
     printf("---------------------------------------------------------------------------\r\n\n");
@@ -261,21 +260,21 @@ int main(void)
                         printf("------------------------------------------------------------------------------\r\n\n");
                         printf("Entering Demo 2: High-Priority Interrupt with a Low-Priority Interrupt Pending\r\n\n");
                         printf("------------------------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
+                        TMR1_Start();
                         break;
                     case 51: //Decimal 3 = ASCII 51
                         // Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts
                         printf("---------------------------------------------------------------------------\r\n\n");
                         printf("Entering Demo 3: High-Priority Interrupt Preempting Low-Priority Interrupts\r\n\n");
                         printf("---------------------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
+                        TMR1_Start();
                         break;
                     case 52: //Decimal 4 = ASCII 52
                         // Demo 4: Simultaneous High- and Low-Priority Interrupts
                         printf("---------------------------------------------------------------\r\n\n");
                         printf("Entering Demo 4: Simultaneous High- and Low-Priority Interrupts\r\n\n");
                         printf("---------------------------------------------------------------\r\n\n");
-                        Timer1_Start();
+                        TMR1_Start();
                         Timer0_Start();
                         break;
                     default:
@@ -302,6 +301,10 @@ int main(void)
     {
     }    
 }
+```
+#### System.c Routine
+```c
+Timer1_Initialize(); should change to TMR1_Initialize();
 ```
 
 ## Operation <a name="operation"></a>
@@ -384,6 +387,9 @@ The figures below show the resulting terminal outputs for each of the available 
 #### Demo 4 <a name="demo-4"></a>
 
 <br><img src="images/Demo 4 result.png" width="1500">
+<!-- APPS ENGINEER NOTE: Demo 4 does not have the same order of response when following the rest of this code example-->
+
+
 
 ## Summary
 

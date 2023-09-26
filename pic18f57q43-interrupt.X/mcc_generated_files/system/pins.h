@@ -8,11 +8,11 @@
  * @brief This is generated driver header for pins. 
  *        This header file provides APIs for all pins selected in the GUI.
  *
- * @version Driver Version  3.0.0
+ * @version Driver Version  3.1.0
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -68,6 +68,7 @@
 #define Switch_SetOpenDrain()       do { ODCONBbits.ODCB4 = 1; } while(0)
 #define Switch_SetAnalogMode()      do { ANSELBbits.ANSELB4 = 1; } while(0)
 #define Switch_SetDigitalMode()     do { ANSELBbits.ANSELB4 = 0; } while(0)
+#define RB4_SetInterruptHandler  Switch_SetInterruptHandler
 
 // get/set RF0 aliases
 #define IO_RF0_TRIS                 TRISFbits.TRISF0
@@ -127,43 +128,43 @@ void PIN_MANAGER_IOC(void);
 
 /**
  * @ingroup  pinsdriver
- * @brief Interrupt on Change Handler for the RB4 pin functionality
+ * @brief Interrupt on Change Handler for the Switch pin functionality
  * @param none
  * @return none
  */
-void RB4_ISR(void);
+void Switch_ISR(void);
 
 /**
  * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for RB4 pin interrupt-on-change functionality.
- *        Allows selecting an interrupt handler for RB4 at application runtime
+ * @brief Interrupt Handler Setter for Switch pin interrupt-on-change functionality.
+ *        Allows selecting an interrupt handler for Switch at application runtime
  * @pre Pins intializer called
  * @param InterruptHandler function pointer.
  * @return none
  */
-void RB4_SetInterruptHandler(void (* InterruptHandler)(void));
+void Switch_SetInterruptHandler(void (* InterruptHandler)(void));
 
 /**
  * @ingroup  pinsdriver
- * @brief Dynamic Interrupt Handler for RB4 pin.
- *        This is a dynamic interrupt handler to be used together with the RB4_SetInterruptHandler() method.
- *        This handler is called every time the RB4 ISR is executed and allows any function to be registered at runtime.
+ * @brief Dynamic Interrupt Handler for Switch pin.
+ *        This is a dynamic interrupt handler to be used together with the Switch_SetInterruptHandler() method.
+ *        This handler is called every time the Switch ISR is executed and allows any function to be registered at runtime.
  * @pre Pins intializer called
  * @param none
  * @return none
  */
-extern void (*RB4_InterruptHandler)(void);
+extern void (*Switch_InterruptHandler)(void);
 
 /**
  * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for RB4 pin. 
- *        This is a predefined interrupt handler to be used together with the RB4_SetInterruptHandler() method.
- *        This handler is called every time the RB4 ISR is executed. 
+ * @brief Default Interrupt Handler for Switch pin. 
+ *        This is a predefined interrupt handler to be used together with the Switch_SetInterruptHandler() method.
+ *        This handler is called every time the Switch ISR is executed. 
  * @pre Pins intializer called
  * @param none
  * @return none
  */
-void RB4_DefaultInterruptHandler(void);
+void Switch_DefaultInterruptHandler(void);
 
 
 #endif // PINS_H

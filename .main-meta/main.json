@@ -10,21 +10,21 @@
         "shortDescription": "This code example showcases the operation of vectored interrupts using Timer 0, Timer 1 and Interrupt on Change as the interrupt sources. The result of this example will be displayed in the MPLAB Data Visualizer through the UART interface.",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=6.0.0"
+            "semverRange": ">=6.15.0"
         },
         "compiler": [
             {
                 "name": "XC8",
-                "semverRange": "^2.35.0"
+                "semverRange": "^2.45.0"
             }
         ],
         "dfp": {
             "name": "PIC18F-Q_DFP",
-            "semverRange": "^1.13.211"
+            "semverRange": "^1.21.411"
         },
         "configurator": {
             "name": "MCC",
-            "semverRange": ">=5.1.1"
+            "semverRange": ">=5.3.7"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -36,7 +36,7 @@
                 "versionRange": "*"
             }
         },
-        "author": "Sam Lam",
+        "author": "Jonah Lerner",
         "peripherals": [
             "INT", 
             "TMR", 
