@@ -1251,6 +1251,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1ffff"/>
         <property key="poweroptions.powerenable" value="true"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Users/c63290/MPLABXProjects/pic18f57q43-cnano-interrupt-mplab-melody/pic18f57q43-interrupt.X/debug/FREE/pic18f57q43-interrupt_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -1337,13 +1339,13 @@
         <targetDevice>PIC18F57Q43</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.40</languageToolchainVersion>
+        <languageToolchainVersion>2.45</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.13.211"/>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.21.411"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
