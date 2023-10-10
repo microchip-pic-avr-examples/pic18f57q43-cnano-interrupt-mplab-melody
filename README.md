@@ -393,7 +393,8 @@ The figures below show the resulting terminal outputs for each of the available 
 
 ## Summary
 
-<!-- Summarize what the example has shown -->
-
 This code example showcases the vectored interrupt feature of the PIC18F57Q43.
 This demo is for the Microchip University 8-bit PIC® MCU Peripheral Deep Dive Interrupt class.
+
+
+
